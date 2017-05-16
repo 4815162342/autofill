@@ -1,51 +1,60 @@
-<img src="https://i.imgur.com/Tfi0xR5.jpg" width="600" style="float:right">
+## Project Overview
+We have created this project as a means to see how well you can implement your version of the Hux address autofill form. The task is simple — create a basic web app with a **text box** for address entry and a results **ul** backed by objects of a **consistent, normalized schema**. It is definitely expected that it should work as well as the one at hux.com checkout.
 
-## Autocomplete Test
-This is a test for applicants for the developer position at Hux. To complete the test, clone the repo and develop an interface and one meteor method that satisfies all the requirements. 
+While this may sound simple at first, Google Maps Autocomplete API results are merely address `strings` and `place_id`s, but we need more data. You must therefore call another API to add the missing data. This is the opposite of an ideal implementation, but we challenge you to handle this use case with grace, as Google provides the only reliable Street Address API.
 
-The desired output is a list of valid street addresses that contain the characters typed by the user and are close the users location (Lat & Lon can be hard coded for the test).
+<img src="https://i.imgur.com/Tfi0xR5.jpg" width="600">
 
 ## This Repo
 
-The client/ directory is a template for building a mobile app with the following features:
-
-- An unstyled `input` for the address to be typed into.
-- An event listener attached to `input` that throttles keyup events by 250 ms seconds. Do not change this.
-- An unstyled `ul` element which should be populated with your autofill results.
-
-The server/main.js file is a stub. It has a function that logs the execution time.
+- This repo contains some basic building blocks useful if you are using Meteor, but you don't have to clone this repo. You can start with any language.
+- There is already an `input` and `ul` element in the client template.
+- The `server/main.js` file is a stub. It has a function that logs the execution time.
 
 ## Requirements
 
-#### Client
-- Create the UI that looks like the image.
-- The user can input some characters of a street address.
-- Up to 5 possible results fill in the `ul` element.
-- Results must be formatted like this: `[street number] [street name], [city] [state], [zipcode]`
-- Use the **absolute least** amount of client side code.
-
 ### Server
-- You may use Npm on the server if you like (but we didn't find it useful).
-- Use HTTP from [meteor/http](https://docs.meteor.com/api/http.html) to call the API from the server. It has already been added.
-- Accuracy/quality of results is the most important aspect.
-- For this test your results should prefer addresses near Atlanta, GA. So localize the result set around 33.7490° N, 84.3880° W. 
-- Try your best to beat 600 ms execution time as logged on the server.
-- Tabs instead of spaces.
+- The desired output is a list of street addresses from Google Autocomplete API, but with all results normalized, and with same order as the Autocomplete API call.
+- For this test your results should prefer addresses near Atlanta, GA (33.7490° N, 84.3880° W).
+- Beat 600 ms execution time logged on the server.
+
+### Client
+- Use the **absolute least** amount of client side code.
+- Pretty styling is not required as this is more of a backend role.
+- The content of the `li` should be the `street` field of each result.
 
 Here are the params to the autocomplete call:
 
-    var params = {
-	      key: 'AIzaSyDwbZ_q0Pf927tJrhb9aF9cO1EmyBbZrGU',
-	      location: '33.7490,-84.3880',
-	      radius: 50000,
-	      rankby: 'distance'
-    };
+``` javascript
+var params = {
+      key: 'AIzaSyDwbZ_q0Pf927tJrhb9aF9cO1EmyBbZrGU',
+      location: '33.7490,-84.3880',
+      radius: 50000,
+      rankby: 'distance'
+};
+```
 
-## Big Picture
-- Don't work more than 7 hours
-- Reach out to James if you get stuck
+Here is a good schema for each item in the results set.
+
+``` javascript
+{
+	'place': 'AIzaSyDwbZ_q0Pf927tJrhb9aF9cO1EmyBbZrGU',
+	'street': '464 Ethel St NW, Atlanta, GA 30318',
+	'city': 'Atlanta',
+	'state': 'GA',
+	'zipcode': '30318',
+	'latlng': {
+		'lat': '33.7490',
+		'lng': '-84.3880'
+	}
+}
+```
 
 ## Help
+- Don't work more than 6 hours
+- Reach out to James if you get stuck at james@hux.com
+
+## Want to use the Meteor platform?
 - [Meteor Tutorial](https://www.meteor.com/try)
 - [Meteor Guide](http://guide.meteor.com)
 - [Meteor Docs](https://docs.meteor.com)
