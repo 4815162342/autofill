@@ -17,11 +17,13 @@ While this may sound simple at first, Google Maps Autocomplete API results are m
 - The desired output is a list of street addresses from Google Autocomplete API, but with all results normalized, and with same order as the Autocomplete API call.
 - For this test your results should prefer addresses near Atlanta, GA (33.7490° N, 84.3880° W).
 - Beat 600 ms execution time logged on the server.
+- Written in the Meteor framework
 
 ### Client
 - Use the **absolute least** amount of client side code.
 - Pretty styling is not required as this is more of a backend role.
 - The content of the `li` should be the `street` field of each result.
+- Written in the Meteor framework
 
 Here are the params to the autocomplete call:
 
